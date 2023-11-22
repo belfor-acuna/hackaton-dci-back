@@ -41,4 +41,35 @@ async function uploadRequest(title,description,category,subcategory){
      
 }
 
-export {listRequests, uploadRequest}
+async function updateRequestStatus(status,requestID){
+
+  if(!status){
+      throw new Error('Falta un estado para modificar');
+  }
+
+  if(!requestID){
+      throw new Error('Falta una ID');
+  }
+
+  try{
+
+      const selectedRequest = await Request.findById(requestID);
+
+      if(!selectedRequest){
+          throw new Error('No existe una solicitud con esa ID');
+      }
+
+      selectedRequest.status = status;
+      await selectedRequest.save();
+
+      return { selectedRequest, status:200 }
+      
+  }
+  catch(error){
+      console.error(error);
+      return { error: error.message, status: 500 };
+  }
+  
+}
+
+export {listRequests, uploadRequest, updateRequestStatus}

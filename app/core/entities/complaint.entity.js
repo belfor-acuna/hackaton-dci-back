@@ -3,8 +3,6 @@ import mongoose from "mongoose";
 const complaintSchema = new mongoose.Schema({
 	description: {
 		type: String,
-		required: true,
-        unique:true,
 	},
 	category: {
 		type: String,
@@ -17,7 +15,7 @@ const complaintSchema = new mongoose.Schema({
 	title:{
 		type:String,
 	},
-    photo: {
+    photoURL: {
         type: String,
         required: false,
     },

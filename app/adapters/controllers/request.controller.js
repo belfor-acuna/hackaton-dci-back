@@ -20,11 +20,12 @@ async function getRequests(req, res) {
 }
 
 async function uploadRequest(req,res){
+
     const title = req.body.title;
     const description = req.body.description;
     const category = req.body.category;
     const subcategory = req.body.subcategory;
-    const photoURL = req.body.photoURL;
+
     try {
         const result = await requestsUseCase.uploadRequest(title,description,category,subcategory,photoURL);
     
@@ -42,4 +43,26 @@ async function uploadRequest(req,res){
       }
 }
 
-export { getRequests,uploadRequest }
+async function updateRequestStatus(req,res){
+    const requestId = req.params.requestId;
+    const status = req.body.status;
+    try{
+
+      const result = await requestsUseCase.updateRequestStatus(status,requestId);
+
+      if (result.error) {
+        return res.status(result.status).send({ error: result.error });
+      }
+  
+      return res.status(result.status).send({ ...result });
+    }
+
+    catch(error){
+
+        console.error(error);
+        return res.status(500).send({ error: error.message });
+        
+    }
+}
+
+export { getRequests,uploadRequest, updateRequestStatus }
