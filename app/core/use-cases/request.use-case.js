@@ -15,11 +15,15 @@ async function listRequests() {
   }
 }
 
-async function uploadRequest(rut,description,category,subcategory){
+async function uploadRequest(rut,description,category,subcategory,phone){
 
     if (!rut || !(rut.length === 11 || rut.length === 12)) {
 
         throw new Error('El campo rut no es válido');
+    }
+
+    if (phone && !(phone.length === 9)) {
+      throw new Error('El campo telefono no es válido');
     }
 
     try{
@@ -32,7 +36,8 @@ async function uploadRequest(rut,description,category,subcategory){
             description:description,
             category:category,
             subcategory:subcategory,
-            status:"Pendiente"
+            status:"Pendiente",
+            userPhone:phone
         })
 
         return { request, status: 200 };

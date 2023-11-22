@@ -25,9 +25,10 @@ async function uploadRequest(req,res){
     const description = req.body.description;
     const category = req.body.category;
     const subcategory = req.body.subcategory;
+    const phone = req.body.phone;
 
     try {
-        const result = await requestsUseCase.uploadRequest(rut,description,category,subcategory);
+        const result = await requestsUseCase.uploadRequest(rut,description,category,subcategory,phone);
     
         if (result.error) {
           return res.status(result.status).send({ error: result.error });

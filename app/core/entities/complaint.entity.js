@@ -26,7 +26,10 @@ const complaintSchema = new mongoose.Schema({
 	userRut:{
 		type: String
 	}
-
+	,
+	userPhone:{
+		type:String
+	}
 });
 
 const complaintModel = mongoose.model("Complaint", complaintSchema);

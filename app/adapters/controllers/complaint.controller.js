@@ -25,10 +25,10 @@ async function uploadComplaint(req,res){
     const category = req.body.category;
     const subcategory = req.body.subcategory;
     const photoURL = req.body.photoURL;
-    const userId = req.body.userId;
+    const phone = req.body.phone;
 
     try {
-        const result = await complaintsUseCase.uploadComplaint(rut,description,category,subcategory,photoURL,userId);
+        const result = await complaintsUseCase.uploadComplaint(rut,description,category,subcategory,photoURL,phone);
   
         if (result.error) {
            return res.status(result.status).send({ error: result.error });

@@ -19,6 +19,9 @@ const requestSchema = new mongoose.Schema({
     },
 	userRut:{
 		type: String
+	},
+	userPhone:{
+		type:String
 	}
 });
 

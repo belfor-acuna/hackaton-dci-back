@@ -16,10 +16,14 @@ async function listComplaints(){
     }
 }
 
-async function uploadComplaint(rut,description,category,subcategory,photoURL){
+async function uploadComplaint(rut,description,category,subcategory,photoURL,phone){
 
     if (!rut || !(rut.length === 11 || rut.length === 12)) {
         throw new Error('El campo rut no es válido');
+      }
+    
+    if (phone && !(phone.length === 9)) {
+        throw new Error('El campo telefono no es válido');
       }
 
     try{
@@ -34,7 +38,8 @@ async function uploadComplaint(rut,description,category,subcategory,photoURL){
             category:category,
             subcategory:subcategory,
             photoURL:photoURL,
-            status:"Pendiente"
+            status:"Pendiente",
+            userPhone:phone
         })
 
         return { complaint, status: 200 };
