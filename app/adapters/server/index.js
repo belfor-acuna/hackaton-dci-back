@@ -4,7 +4,6 @@ import cors from "cors";
 import authRoutes from "../routes/auth.routes.js";
 import requestsRoutes from "../routes/requests.routes.js"
 import complaintsRoutes from "../routes/complaints.routes.js"
-import adminRoutes from "../routes/admin.routes.js"
 
 import connectDB from "../data-access/mongo.js";
 import {PORT} from "../../config/environment.js";
@@ -18,7 +17,6 @@ app.use(cors({
 app.use("/auth", authRoutes);
 app.use("/complaints",complaintsRoutes);
 app.use("requests",requestsRoutes);
-app.use("/admin", adminRoutes)
 
 async function startSever() {
 	const isConnected = await connectDB();
