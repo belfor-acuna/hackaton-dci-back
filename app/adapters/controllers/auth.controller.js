@@ -1,4 +1,4 @@
-import * as authUseCase from '../../core/use-cases/auth.use-case';
+import * as authUseCase from '../../core/use-cases/auth.use-case.js';
 
 export async function loginUser(req, res) {
     const claveUnica = req.claveUnica;
@@ -10,7 +10,7 @@ export async function loginUser(req, res) {
         return res.status(result.status).send({ error: result.error });
       }
   
-      return res.status(result.status).send({ ...result });
+      return res.status(result.status).send({ usuario:result });
 
     } catch (error) {
 

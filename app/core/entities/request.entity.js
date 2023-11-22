@@ -17,8 +17,12 @@ const requestSchema = new mongoose.Schema({
         type: String,
         required: false,
     },
+	status: {
+        type: String,
+        required: false,
+    },
 });
 
-const userModel = mongoose.model("Request", requestSchema);
+const requestModel = mongoose.model("Request", requestSchema);
 
 export default requestModel;

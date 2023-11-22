@@ -16,7 +16,7 @@ app.use(cors({
 
 app.use("/auth", authRoutes);
 app.use("/complaints",complaintsRoutes);
-app.use("requests",requestsRoutes);
+app.use("/requests",requestsRoutes);
 
 async function startSever() {
 	const isConnected = await connectDB();

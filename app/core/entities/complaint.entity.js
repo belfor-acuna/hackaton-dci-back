@@ -17,8 +17,12 @@ const complaintSchema = new mongoose.Schema({
         type: String,
         required: false,
     },
+	status: {
+        type: String,
+        required: false,
+    },
 });
 
-const userModel = mongoose.model("complaint", complaintSchema);
+const complaintModel = mongoose.model("Complaint", complaintSchema);
 
 export default complaintModel;
