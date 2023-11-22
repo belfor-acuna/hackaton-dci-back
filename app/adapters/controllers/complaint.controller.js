@@ -20,14 +20,15 @@ async function getComplaints(req, res) {
 }
 
 async function uploadComplaint(req,res){
-    const title = req.body.title;
+    const rut = req.body.rut;
     const description = req.body.description;
     const category = req.body.category;
     const subcategory = req.body.subcategory;
     const photoURL = req.body.photoURL;
+    const userId = req.body.userId;
 
     try {
-        const result = await complaintsUseCase.uploadComplaint(title,description,category,subcategory,photoURL);
+        const result = await complaintsUseCase.uploadComplaint(rut,description,category,subcategory,photoURL,userId);
   
         if (result.error) {
            return res.status(result.status).send({ error: result.error });
@@ -61,8 +62,26 @@ async function updateComplaintStatus(req,res){
 
         console.error(error);
         return res.status(500).send({ error: error.message });
-        
+
     }
 }
 
-export { getComplaints, uploadComplaint, updateComplaintStatus }
+async function getComplaintDetail(req,res){
+  const complaintId = req.params.complaintId;
+  try{
+    const result = await complaintsUseCase.getComplaintDetail(complaintId);
+
+    if (result.error) {
+      return res.status(result.status).send({ error: result.error });
+    }
+
+    return res.status(result.status).send({ ...result });
+
+  }
+  catch(error){
+      console.error(error);
+      return res.status(500).send({ error: error.message });
+  }
+}
+
+export { getComplaints, uploadComplaint, updateComplaintStatus, getComplaintDetail }

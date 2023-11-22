@@ -16,17 +16,20 @@ async function listComplaints(){
     }
 }
 
-async function uploadComplaint(title,description,category,subcategory,photoURL){
+async function uploadComplaint(rut,description,category,subcategory,photoURL){
+
+    if (!rut || !(rut.length === 11 || rut.length === 12)) {
+        throw new Error('El campo rut no es válido');
+      }
+
     try{
 
-        if (!title) {
-            throw new Error('Falta campo titulo');
-          }
         if (!description) {
             throw new Error('Falta campo descripción');
           }
+        
         const complaint = await Complaint.create({
-            title:title,
+            userRut:rut,
             description:description,
             category:category,
             subcategory:subcategory,
@@ -43,19 +46,19 @@ async function uploadComplaint(title,description,category,subcategory,photoURL){
      
 }
 
-async function updateComplaintStatus(status,complaintID){
+async function updateComplaintStatus(status,complaintId){
 
     if(!status){
         throw new Error('Falta un estado para modificar');
     }
 
-    if(!complaintID){
+    if(!complaintId){
         throw new Error('Falta una ID');
     }
 
     try{
 
-        const selectedComplaint = await Complaint.findById(complaintID);
+        const selectedComplaint = await Complaint.findById(complaintId);
 
         if(!selectedComplaint){
             throw new Error('No existe un reclamo con esa ID');
@@ -74,4 +77,22 @@ async function updateComplaintStatus(status,complaintID){
     
 }
 
-export {listComplaints,uploadComplaint,updateComplaintStatus}
+async function getComplaintDetail(complaintId){
+    if(!complaintId){
+        throw new Error('Falta una ID');
+    }
+
+    try{
+        const selectedComplaint = await Complaint.findById(complaintId);
+        if(!selectedComplaint){
+            throw new Error('No existe un reclamo con esa ID');
+        }
+        return{ selectedComplaint, status:200}
+    }
+    catch(error){
+        console.error(error);
+        return { error: error.message, status: 500 };
+    }
+}
+
+export {listComplaints,uploadComplaint,updateComplaintStatus,getComplaintDetail}

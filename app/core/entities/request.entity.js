@@ -17,6 +17,9 @@ const requestSchema = new mongoose.Schema({
         type: String,
         required: false,
     },
+	userRut:{
+		type: String
+	}
 });
 
 const requestModel = mongoose.model("Request", requestSchema);

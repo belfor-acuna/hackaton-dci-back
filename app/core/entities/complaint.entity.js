@@ -23,6 +23,10 @@ const complaintSchema = new mongoose.Schema({
         type: String,
         required: false,
     },
+	userRut:{
+		type: String
+	}
+
 });
 
 const complaintModel = mongoose.model("Complaint", complaintSchema);

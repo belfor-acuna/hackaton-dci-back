@@ -15,17 +15,20 @@ async function listRequests() {
   }
 }
 
-async function uploadRequest(title,description,category,subcategory){
+async function uploadRequest(rut,description,category,subcategory){
+
+    if (!rut || !(rut.length === 11 || rut.length === 12)) {
+
+        throw new Error('El campo rut no es válido');
+    }
+
     try{
 
-        if (!title) {
-            throw new Error('Falta campo titulo');
-          }
         if (!description) {
             throw new Error('Falta campo descripción');
           }
         const request = await Request.create({
-            title:title,
+            userRut:rut,
             description:description,
             category:category,
             subcategory:subcategory,
@@ -72,4 +75,23 @@ async function updateRequestStatus(status,requestID){
   
 }
 
-export {listRequests, uploadRequest, updateRequestStatus}
+async function getRequestDetail(requestId){
+  if(!requestId){
+      throw new Error('Falta una ID');
+  }
+
+  try{
+      const selectedRequest = await Request.findById(requestId);
+      if(!selectedRequest){
+          throw new Error('No existe una solicitud con esa ID');
+      }
+      return{ selectedRequest, status:200}
+  }
+
+  catch(error){
+      console.error(error);
+      return { error: error.message, status: 500 };
+  }
+}
+
+export {listRequests, uploadRequest, updateRequestStatus, getRequestDetail}
