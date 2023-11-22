@@ -10,7 +10,11 @@ const complaintSchema = new mongoose.Schema({
 		type: String,
         required:true,
 	},
-	titulo:{
+	subcategory: {
+		type: String,
+        required:true,
+	},
+	title:{
 		type:String,
 	},
     photo: {

@@ -9,7 +9,7 @@ async function getComplaints(req, res) {
         return res.status(result.status).send({ error: result.error });
         }
 
-        return res.status(result.status).send({ quejas:result });
+        return res.status(result.status).send({ ...result });
   
       } catch (error) {
   

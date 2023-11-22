@@ -10,7 +10,7 @@ export async function loginUser(req, res) {
         return res.status(result.status).send({ error: result.error });
       }
   
-      return res.status(result.status).send({ usuario:result });
+      return res.status(result.status).send({ ...result });
 
     } catch (error) {
 

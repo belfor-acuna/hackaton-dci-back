@@ -2,7 +2,7 @@ import express from "express";
 import {getComplaints,uploadComplaint} from "../controllers/complaint.controller.js";
 const router = express.Router();
 
-router.post("/crear-reclamo",uploadComplaint);
-router.post("/reclamos",getComplaints);
+router.post("/new-complaint",uploadComplaint);
+router.get("/all",getComplaints);
 
 export default router;
