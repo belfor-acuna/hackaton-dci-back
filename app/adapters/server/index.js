@@ -10,8 +10,14 @@ import {PORT} from "../../config/environment.js";
 
 const app = express();
 app.use(express.json());
+
+const allowedOrigins = [
+	'http://contacto.mtraiguen.cl:3000',
+	'http://localhost:3000'
+  ];
+
 app.use(cors({
-	origin: 'http://localhost:3000'
+	origin: allowedOrigins
 }));
 
 app.use("/auth", authRoutes);
